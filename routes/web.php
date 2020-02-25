@@ -11,6 +11,32 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// use App\Http\Controllers\SiteController;
+
+
+    Route::get('/', 'SiteController@home')->name('home');
+    
+    //Catalog
+
+    Route::get('/catalog', 'SiteController@catalog')->name('typography');
+
+    // //News
+    // Route::get('/news', function(){
+    //     return "News";
+    // })->name('news');
+    
+    // Route::get('/news/{date}/{slug}', function($date, $slug){
+    //     echo $date;
+    //     echo "<br>";
+    //     echo $slug;
+    // })->name('news');
+    
+    //About us
+    
+    Route::get('/about', 'SiteController@about')->name('About');
+    
+    //Contact
+    
+    Route::get('/contact', 'SiteController@contact')->name('Contact');
+
+
