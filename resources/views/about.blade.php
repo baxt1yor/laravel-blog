@@ -13,7 +13,7 @@
         </div>
         <div class="container">
           <ul class="breadcrumbs-custom-path">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li class="active">About us</li>
           </ul>
         </div>
@@ -111,66 +111,32 @@
         <div class="container">
           <h3 class="oh"><span class="d-inline-block wow slideInUp" data-wow-delay="0s">our team</span></h3>
           <div class="row row-lg row-40 justify-content-center">
+            @foreach($posts as $post)
             <div class="col-sm-6 col-lg-3 wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">
               <!-- Team Modern-->
-              <article class="team-modern"><a class="team-modern-figure" href="#"><img src="images/team-01-270x236.jpg" alt="" width="270" height="236"/></a>
+              <article class="team-modern">
+                <a class="team-modern-figure blog_item_date" href="#">
+                  <img src="{{$post->img}}" alt="" width="270" height="270">
+                      <h3>{{$post->created_at->format('d')}}</h3>
+                      <p>{{$post->created_at->format('M')}}</p>
+                </a>
                 <div class="team-modern-caption">
-                  <h6 class="team-modern-name"><a href="#">Richard Peterson</a></h6>
-                  <div class="team-modern-status">Head Chef</div>
+                  <h6 class="team-modern-name"><a href="#">{{$post->title}}</a></h6>
+                  <div class="team-modern-status">{{$post->short}}</div>
                   <ul class="list-inline team-modern-social-list">
                     <li><a class="icon mdi mdi-facebook" href="#"></a></li>
                     <li><a class="icon mdi mdi-twitter" href="#"></a></li>
                     <li><a class="icon mdi mdi-instagram" href="#"></a></li>
                     <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
+                    <li><span class="icon mdi fas fa-eye">{{$post->view}}</span></li>
                   </ul>
                 </div>
               </article>
             </div>
-            <div class="col-sm-6 col-lg-3 wow fadeInLeft" data-wow-delay="0s" data-wow-duration="1s">
-              <!-- Team Modern-->
-              <article class="team-modern"><a class="team-modern-figure" href="#"><img src="images/team-02-270x236.jpg" alt="" width="270" height="236"/></a>
-                <div class="team-modern-caption">
-                  <h6 class="team-modern-name"><a href="#">Amelia Lee</a></h6>
-                  <div class="team-modern-status">Manager</div>
-                  <ul class="list-inline team-modern-social-list">
-                    <li><a class="icon mdi mdi-facebook" href="#"></a></li>
-                    <li><a class="icon mdi mdi-twitter" href="#"></a></li>
-                    <li><a class="icon mdi mdi-instagram" href="#"></a></li>
-                    <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
-                  </ul>
-                </div>
-              </article>
-            </div>
-            <div class="col-sm-6 col-lg-3 wow fadeInRight" data-wow-delay=".1s" data-wow-duration="1s">
-              <!-- Team Modern-->
-              <article class="team-modern"><a class="team-modern-figure" href="#"><img src="images/team-03-270x236.jpg" alt="" width="270" height="236"/></a>
-                <div class="team-modern-caption">
-                  <h6 class="team-modern-name"><a href="#">Sam Peterson</a></h6>
-                  <div class="team-modern-status">Head Baker</div>
-                  <ul class="list-inline team-modern-social-list">
-                    <li><a class="icon mdi mdi-facebook" href="#"></a></li>
-                    <li><a class="icon mdi mdi-twitter" href="#"></a></li>
-                    <li><a class="icon mdi mdi-instagram" href="#"></a></li>
-                    <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
-                  </ul>
-                </div>
-              </article>
-            </div>
-            <div class="col-sm-6 col-lg-3 wow fadeInRight" data-wow-delay=".3s" data-wow-duration="1s">
-              <!-- Team Modern-->
-              <article class="team-modern"><a class="team-modern-figure" href="#"><img src="images/team-04-270x236.jpg" alt="" width="270" height="236"/></a>
-                <div class="team-modern-caption">
-                  <h6 class="team-modern-name"><a href="#">Jane Smith</a></h6>
-                  <div class="team-modern-status">Pizza Chef</div>
-                  <ul class="list-inline team-modern-social-list">
-                    <li><a class="icon mdi mdi-facebook" href="#"></a></li>
-                    <li><a class="icon mdi mdi-twitter" href="#"></a></li>
-                    <li><a class="icon mdi mdi-instagram" href="#"></a></li>
-                    <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
-                  </ul>
-                </div>
-              </article>
-            </div>
+            @endforeach
+            <nav class="blog-pagination justify-content-center d-flex">
+                {{ $links }}                            
+            </nav>
           </div>
         </div>
       </section>

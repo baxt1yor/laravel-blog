@@ -64,7 +64,7 @@
                   <!-- RD Navbar Toggle-->
                   <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                   <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand"><a class="brand" href="index.html"><img class="brand-logo-dark" src="images/logo-198x66.png" alt="" width="198" height="66"/></a></div>
+                  <div class="rd-navbar-brand"><a class="brand" href="/"><img class="brand-logo-dark" src="images/logo-198x66.png" alt="" width="198" height="66"/></a></div>
                 </div>
                 <div class="rd-navbar-right rd-navbar-nav-wrap">
                   <div class="rd-navbar-aside">
@@ -92,13 +92,13 @@
                   <div class="rd-navbar-main">
                     <!-- RD Navbar Nav-->
                     <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item active"><a class="rd-nav-link" href="/">Home</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/">Home</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/about">About us</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/about">About</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/typography">Typography</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/blog">Blog</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/contacts">Contacts</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/contact">Contacts</a>
                       </li>
                     </ul>
                   </div>
@@ -207,12 +207,12 @@
               <div class="col-md-6 col-lg-4 col-xl-3">
                 <h5 class="footer-modern-title oh-desktop"><span class="d-inline-block wow slideInLeft">Information</span></h5>
                 <ul class="footer-modern-list d-inline-block d-sm-block wow fadeInUp">
-                  <li><a href="about-us.html">About us</a></li>
+                  <li><a href="/about">About us</a></li>
                   <li><a href="#">Latest News</a></li>
                   <li><a href="#">Our Menu</a></li>
                   <li><a href="#">FAQ</a></li>
                   <li><a href="#">Shop</a></li>
-                  <li><a href="contacts.html">Contact Us</a></li>
+                  <li><a href="/contact">Contact Us</a></li>
                 </ul>
               </div>
               <div class="col-lg-4 col-xl-5">
@@ -237,7 +237,7 @@
             <div class="row row-30 align-items-center">
               <div class="col-sm-6 col-md-7 col-lg-4 col-xl-4">
                 <div class="row row-30 align-items-center text-lg-center">
-                  <div class="col-md-7 col-xl-6"><a class="brand" href="index.html"><img src="images/logo-inverse-198x66.png" alt="" width="198" height="66"/></a></div>
+                  <div class="col-md-7 col-xl-6"><a class="brand" href="/"><img src="images/logo-inverse-198x66.png" alt="" width="198" height="66"/></a></div>
                   <div class="col-md-5 col-xl-6">
                     <div class="iso-1"><span><img src="images/like-icon-58x25.png" alt="" width="58" height="25"/></span><span class="iso-1-big">9.4k</span></div>
                   </div>
