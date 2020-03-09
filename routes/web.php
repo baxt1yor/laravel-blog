@@ -11,25 +11,11 @@
 |
 */
 
-// use App\Http\Controllers\SiteController;
 
-
-    Route::get('/', 'SiteController@home')->name('home');
-    
-    //Catalog
-
-    
-    // //News
-    // Route::get('/news', function(){
-        //     return "News";
-        // })->name('news');
-        
-        // Route::get('/news/{date}/{slug}', function($date, $slug){
-            //     echo $date;
-            //     echo "<br>";
-            //     echo $slug;
-            // })->name('news');
-            
+//use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route;
+            //Home
+            Route::get('/', 'SiteController@home')->name('home'); 
             //About us
             
             Route::get('/about', 'SiteController@about')->name('about');
@@ -38,5 +24,9 @@
             
             //Contact
             Route::get('/contact', 'SiteController@contact')->name('contact');
-            
+
+            //admin 
+            Route::namespace('admin')->name('admin.')->prefix('admin')->group(function () {
+                Route::resource('posts', 'PostsController');
+            });
 

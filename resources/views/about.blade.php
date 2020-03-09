@@ -134,9 +134,9 @@
               </article>
             </div>
             @endforeach
-            <nav class="blog-pagination justify-content-center d-flex">
-                {{ $links }}                            
-            </nav>
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">{{$links}}</a></li>
+              </ul>
           </div>
         </div>
       </section>
