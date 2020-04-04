@@ -22,42 +22,40 @@
         <div class="container">
           <div class="row row-60 justify-content-center">
             <div class="col-lg-8">
+              @if (session()->has('syccess'))
+                  <div class="alert alert-success">
+                    {{session()->get('success')}}
+                  </div>
+              @endif
+  
+              @include('admin.alerts.main')
               <h4 class="text-spacing-25 text-transform-none">Get in Touch</h4>
-              <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+              <form  method="post" action="{{route('contact.store')}}">
+                @csrf
+                @method('post')
                 <div class="row row-20 gutters-20">
                   <div class="col-md-6">
                     <div class="form-wrap">
-                      <input class="form-input" id="contact-your-name-5" type="text" name="name" data-constraints="@Required">
+                    <input value="{{ old('name')}}" class="form-input" id="contact-your-name-5" type="text" name="name" >
                       <label class="form-label" for="contact-your-name-5">Your Name*</label>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-wrap">
-                      <input class="form-input" id="contact-email-5" type="email" name="email" data-constraints="@Email @Required">
+                      <input value="{{ old('email')}}" class="form-input" id="contact-email-5" type="email" name="email" >
                       <label class="form-label" for="contact-email-5">Your E-mail*</label>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-12">
                     <div class="form-wrap">
-                      <!--Select 2-->
-                      <select class="form-input" data-minimum-results-for-search="Infinity" data-constraints="@Required">
-                        <option value="1">Select a Service</option>
-                        <option value="2">Dine-In</option>
-                        <option value="3">Carry-Out</option>
-                        <option value="4">Event Catering</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-wrap">
-                      <input class="form-input" id="contact-phone-5" type="text" name="phone" data-constraints="@Numeric">
-                      <label class="form-label" for="contact-phone-5">Your Phone*</label>
+                      <input value="{{ old('subject')}}" class="form-input" id="contact-your-subject-5" type="text" name="subject" >
+                      <label class="form-label" for="contact-your-subject-5">Your Subject*</label>
                     </div>
                   </div>
                   <div class="col-12">
                     <div class="form-wrap">
                       <label class="form-label" for="contact-message-5">Message</label>
-                      <textarea class="form-input textarea-lg" id="contact-message-5" name="message" data-constraints="@Required"></textarea>
+                      <textarea class="form-input textarea-lg" id="contact-message-5" name="message">{{ old('message')}}</textarea>
                     </div>
                   </div>
                 </div>

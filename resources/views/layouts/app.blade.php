@@ -8,10 +8,10 @@
     <meta charset="utf-8">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <!-- Stylesheets-->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,500,600,700,900%7CRaleway:500">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
@@ -72,33 +72,33 @@
                       <li>
                         <div class="unit unit-spacing-xs">
                           <div class="unit-left"><span class="icon mdi mdi-phone"></span></div>
-                          <div class="unit-body"><a class="phone" href="tel:#">+1 718-999-3939</a></div>
+                          <div class="unit-body"><a class="phone" href="tel:#">+998 99 969 08 98</a></div>
                         </div>
                       </li>
                       <li>
                         <div class="unit unit-spacing-xs">
                           <div class="unit-left"><span class="icon mdi mdi-map-marker"></span></div>
-                          <div class="unit-body"><a class="address" href="#">514 S. Magnolia St. Orlando, FL 32806</a></div>
+                          <div class="unit-body"><a class="address" href="#">4 S. Yoshlar St. Uzbekistan</a></div>
                         </div>
                       </li>
                     </ul>
                     <ul class="list-share-2">
-                      <li><a class="icon mdi mdi-facebook" href="#"></a></li>
-                      <li><a class="icon mdi mdi-twitter" href="#"></a></li>
-                      <li><a class="icon mdi mdi-instagram" href="#"></a></li>
+                      <li><a class="icon mdi mdi-facebook" href="facebook.com/baxtiyor.eshametov"></a></li>
+                      <li><a class="icon mdi mdi-twitter" href="twitter.com/real_viruss"></a></li>
+                      <li><a class="icon mdi mdi-instagram" href="instagram.com/baxtiyor.eshametov"></a></li>
                       <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
                     </ul>
                   </div>
                   <div class="rd-navbar-main">
                     <!-- RD Navbar Nav-->
                     <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/">Home</a>
+                    <li class="rd-nav-item {{request()->is('/*') ? 'active' : ''}}"><a class="rd-nav-link" href="/">Home</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/about">About</a>
+                      <li class="rd-nav-item {{request()->is('about*') ? 'active' : ''}}"><a class="rd-nav-link" href="/about">About</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/blog">Blog</a>
+                      <li class="rd-nav-item {{request()->is('blog*') ? 'active' : ''}}"><a class="rd-nav-link" href="/blog">Blog</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/contact">Contacts</a>
+                      <li class="rd-nav-item {{request()->is('contact*') ? 'active' : ''}}"><a class="rd-nav-link" href="/contact">Contacts</a>
                       </li>
                     </ul>
                   </div>
@@ -207,7 +207,7 @@
               <div class="col-md-6 col-lg-4 col-xl-3">
                 <h5 class="footer-modern-title oh-desktop"><span class="d-inline-block wow slideInLeft">Information</span></h5>
                 <ul class="footer-modern-list d-inline-block d-sm-block wow fadeInUp">
-                  <li><a href="/about">About us</a></li>
+                  <li><a href="/about">About </a></li>
                   <li><a href="#">Latest News</a></li>
                   <li><a href="#">Our Menu</a></li>
                   <li><a href="#">FAQ</a></li>
@@ -248,7 +248,7 @@
                   <div class="footer-modern-contacts wow slideInUp">
                     <div class="unit unit-spacing-sm align-items-center">
                       <div class="unit-left"><span class="icon icon-24 mdi mdi-phone"></span></div>
-                      <div class="unit-body"><a class="phone" href="tel:#">+1 718-999-3939</a></div>
+                      <div class="unit-body"><a class="phone" href="tel:#">+998 99 969 08 98</a></div>
                     </div>
                   </div>
                   <div class="footer-modern-contacts wow slideInDown">
@@ -273,7 +273,7 @@
         <div class="footer-modern-line-3">
           <div class="container">
             <div class="row row-10 justify-content-between">
-              <div class="col-md-6"><span>514 S. Magnolia St. Orlando, FL 32806</span></div>
+              <div class="col-md-6"><span>4 S. Yoshlar St. Uzbekistan</span></div>
               <div class="col-md-auto">
                 <!-- Rights-->
                 <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span></span><span>.&nbsp;</span><span>All Rights Reserved.</span><span> Design&nbsp;by&nbsp;<a href="https://www.templatemonster.com">TemplateMonster</a></span></p>
@@ -283,11 +283,11 @@
         </div>
       </footer>
     </div>
-    <!-- Global Mailform Output-->
-    <div class="snackbars" id="form-output-global"></div>
+    {{-- <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div> --}}
     <!-- Javascript-->
-    <script src="js/core.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="/js/core.min.js"></script>
+    <script src="/js/script.js"></script>
     <!-- coded by Himic-->
   </body>
 </html>

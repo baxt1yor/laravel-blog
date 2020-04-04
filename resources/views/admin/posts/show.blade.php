@@ -9,9 +9,7 @@
           </h6>
       </header>
       <div class="panel-body">
-        <h3>
-            {{$blog->tile}}
-        </h3>
+        <img src="/storage/thumbs/{{$blog->img}}" width="100px"  alt="{{$blog->title}}"> <br><br>
         <b>
             Qisqacha:
         </b>
@@ -24,7 +22,10 @@
         <p>
             {{$blog->content}}
         </p>
-        {{$blog->created_at->format('H:i d/m/Y')}}<br>
+        <b>Yaratilgan vaqti:</b>
+        {{$blog->created_at->format('H:i d/m/Y')}}
+        <br>
+        <b>Qayta yuklangan payti:</b>
         {{$blog->updated_at->format('H:i d/m/Y')}}
       </div>
     </section>

@@ -5,3 +5,5 @@ create deb oldindan yozilsa o'zi yozib beradi faqat table nomini kiritb ketsang
 bo'ldi ts 
 php artisan migrate command prom db ishlash
 
+rasm classni qo'shish 
+composer require intervention/image

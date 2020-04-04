@@ -6,19 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Post;
 use App\Blogs;
+use App\Feedback;
 
 class SiteController extends Controller
 {
     public function home() 
     {
-        // $shops = [
-        //     ['name' => 'John Doe', 'type' => 'Stom'],
-        //     ['name' => 'Buster Keaton', 'type' => 'Lor'],
-        //     ['name' => 'Zafar', 'type' => 'Test'],
-        //     ['name' => 'Nodir', 'type' => 'Test 2'],
-        // ];
-        // return view('home', compact('shops')); //['doctors' => $doctors] <=> compact('doctors') 
-            return view('home');
+        return view('home');
     }
 
     public function contact()
@@ -26,17 +20,67 @@ class SiteController extends Controller
         return view('contact');
     }
 
-    public function about()
+    public function feedbackStore(Request $request)
     {
-        $posts = Post::orderBy('id', 'DESC')->paginate(4);
+        $request->validate([
+            'name' => 'required|min:3|max:100',
+            'email' => 'required|email',
+            'subject' => 'required|min:10',
+            'message' => 'required|max:2000',
+            
+        ]);
+        Feedback::create([
+            'name' => $request->post('name'),
+            'email' => $request->post('email'),
+            'subject' => $request->post('subject'),
+            'message' => $request->post('message')
+        ]);
+            //  dd($salom);					
+
+        return redirect()
+               ->route('contact')
+               ->with('success', 'Xabar uchun rahmat ! Tez orada javob beramiz.');
+    }
+    public function about()
+    {  
+        $pagi_size = 4;
+        $posts = Post::latest()->paginate($pagi_size);
         $links = $posts->links();
         return view('about', compact('posts', 'links'));
     }
 
     public function blog()
     {
-        $blogs = Blogs::orderBy('id', 'DESC')->paginate(4);
+        // $blogs = Blogs::orderBy('id', 'DESC')->paginate(4);
+        $page = env('PAGINATE_SIZE', 15);
+        $blogs = Blogs::latest()->paginate($page);
         $link = $blogs->links();
         return view('blog', compact('blogs', 'link'));
+    }
+
+    public function blogmore($id)
+    {
+        $blog = Blogs::findOrFail($id);
+        $blog -> increment('view');
+        //dd($blog);
+        $mosts_viewed = Blogs::mostViews()->get();
+        return view('blog-more', [
+            'blog' => $blog,
+            'most_posts' => $mosts_viewed
+        ]);
+    }
+
+    //search begin
+    public function search (Request $request)
+    {
+       $pages = env('PAGINATE_SIZE', 15);
+       $key = $request->get('key');
+       $key = '%'.trim($key).'%';
+       $results = Blogs::where('title', 'LIKE', $key)
+                       ->orWhere('short', 'LIKE', $key)
+                       ->orWhere('content', 'LIKE', $key)
+                       ->paginate($pages);
+       $link = $results->links();               
+      return view('search', compact('results', 'link')); 
     }
 }

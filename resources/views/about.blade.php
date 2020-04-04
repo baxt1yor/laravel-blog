@@ -116,8 +116,8 @@
               <!-- Team Modern-->
               <article class="team-modern">
                 <a class="team-modern-figure blog_item_date" href="#">
-                  <img src="{{$post->img}}" alt="" width="270" height="270">
-                      <h3>{{$post->created_at->format('d')}}</h3>
+                  <h3>{{$post->created_at->format('d')}}</h3>
+                  <img src="/storage/{{$post->img}}" alt="" width="270" height="270">
                       <p>{{$post->created_at->format('M')}}</p>
                 </a>
                 <div class="team-modern-caption">
@@ -134,9 +134,13 @@
               </article>
             </div>
             @endforeach
-              <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">{{$links}}</a></li>
+            {{$links}}
+            {{-- <div class="list-history-wrap">
+              <ul class="nav list-history">
+                <li class="list-history-item" role="presentation"><a data-toggle="tab">
+                    <div class="list-history-circle"></div></a></li>
               </ul>
+            </div> --}}
           </div>
         </div>
       </section>

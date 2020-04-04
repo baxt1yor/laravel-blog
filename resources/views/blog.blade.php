@@ -26,19 +26,29 @@
               <ul class="list-xl box-typography">
                 <li>
                   <h4>{{$blog->created_at}}</h4>
-                  <img src="{{$blog->img}}" alt="" class="img-responsive" style="border-radius: 5px;" >
+                  <img src="storage/{{$blog->img}}" alt="" class="img-responsive" style="border-radius: 5px;" >
                   <h3>{{$blog->title}}</h3>
-                  <p>{{$blog->short}}</p>
-                  <span class="fas fa-eye">{{$blog->view}}</span>
+                <h5><a href="{{route('blog.more', ['id' => $blog->id ])}}"> {{$blog->short}}</a></h5>
+                  <span class="fas fa-eye"> {{$blog->view}}</span>
                 </li>
               </ul>
             </div>
             @endforeach
-            <nav class="blog-pagination justify-content-center d-flex">
-              {{ $link }}                            
-          </nav>
+            
             <div class="col-lg-4">
               <div class="box-typography-description">
+                <div class="box-typography-description-item">
+                  <form method="GET" action="{{route('search')}}" >
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Search" name="key">
+                      <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>  
+                </div> 
                 <div class="box-typography-description-item">
                   <p class="heading-7">Google Fonts</p>
                   <h3 class="text-transform-none text-spacing-50">Roboto</h3>
@@ -64,6 +74,8 @@
               </div>
             </div>
           </div>
+          
+          {{$link}}
         </div>
       </section>
 

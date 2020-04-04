@@ -1,4 +1,8 @@
+@php
+    use App\Feedback;
 
+    $new_message = Feedback::unreaded()->get();
+@endphp
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,9 +12,9 @@
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-  <link rel="shortcut icon" href="./img/favicon.png">
+  <link rel="shortcut icon" href="/dashboard/img/favicon.ico">
 
-  <title>Creative - Bootstrap Admin Template</title>
+  <title>{{ env('APP_NAME', 'Sayt') }}</title>
 
   <!-- Bootstrap /dashboard/css -->
   <link href="/dashboard/css/bootstrap.min.css" rel="stylesheet">
@@ -50,11 +54,11 @@
 
     <header class="header dark-bg">
       <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+        <div class="icon-reorder tooltips"  data-placement="bottom"><i class="icon_menu"></i></div>
       </div>
 
       <!--logo start-->
-      <a href="index.php" class="logo">Nice <span class="lite">Admin</span></a>
+      <a href="{{route('admin.posts.index')}}" class="logo">{{ env('APP_NAME', 'Sayt') }} <span class="lite">Boshqaruv bo'limi</span></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -76,96 +80,54 @@
           <li id="mail_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-envelope-l"></i>
-                            <span class="badge bg-important">1</span>
+                            <span class="badge bg-important">{{count($new_message)}}</span>
                         </a>
             <ul class="dropdown-menu extended inbox">
               <div class="notify-arrow notify-arrow-blue"></div>
               <li>
-                <p class="blue">You have 1 new messages</p>
+                <p class="blue">Sizga kelgan {{count($new_message)}} xabarlar</p>
               </li>
               <li>
-                <a href="#">
-                                    <span class="photo"><img alt="avatar" src="img/avatar-mini.jpg"></span>
-                                    <span class="subject">
-                                    <span class="from">Greg  Martin</span>
-                                    <span class="time">1 min</span>
-                                    </span>
-                                    <span class="message">
-                                        I really like this admin panel.
-                                    </span>
-                                </a>
+                @foreach ($new_message as $item)
+                  <a href="{{route('admin.feedback.show', $item->id)}}">
+                    <span class="photo"><img alt="avatar" src="/dashboard/img/user.jpg"></span>
+                    <span class="subject">
+                    <span class="from">{{$item->name}}</span>
+                    <span class="time">{{$item->created_at->format('H:i')}}</span>
+                    </span>
+                    <span class="message">
+                        {{$item->subject}}
+                    </span>
+                </a>
+                @endforeach
               </li>
              
               
               <li>
-                <a href="#">See all messages</a>
+                <a href="{{route('admin.feedback.index')}}">Barcha xabarlar</a>
               </li>
             </ul>
           </li>
           <!-- inbox notificatoin end -->
-          <!-- alert notification start-->
-          <li id="alert_notificatoin_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
-                            <i class="icon-bell-l"></i>
-                            <span class="badge bg-important">7</span>
-                        </a>
-            <ul class="dropdown-menu extended notification">
-              <div class="notify-arrow notify-arrow-blue"></div>
-              <li>
-                <p class="blue">You have 4 new notifications</p>
-              </li>
-              <li>
-                <a href="#">
-                                    <span class="label label-primary"><i class="icon_profile"></i></span>
-                                    Friend Request
-                                    <span class="small italic pull-right">5 mins</span>
-                                </a>
-              </li>
-              <li>
-                <a href="#">
-                                    <span class="label label-warning"><i class="icon_pin"></i></span>
-                                    John location.
-                                    <span class="small italic pull-right">50 mins</span>
-                                </a>
-              </li>
-              <li>
-                <a href="#">
-                                    <span class="label label-danger"><i class="icon_book_alt"></i></span>
-                                    Project 3 Completed.
-                                    <span class="small italic pull-right">1 hr</span>
-                                </a>
-              </li>
-              <li>
-                <a href="#">
-                                    <span class="label label-success"><i class="icon_like"></i></span>
-                                    Mick appreciated your work.
-                                    <span class="small italic pull-right"> Today</span>
-                                </a>
-              </li>
-              <li>
-                <a href="#">See all notifications</a>
-              </li>
-            </ul>
-          </li>
-          <!-- alert notification end-->
           <!-- user login dropdown start-->
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="img/avatar-mini2.jpg">
+                                <img alt="" src="/dashboard/img/avatar-mini2.jpg">
                             </span>
-                            <span class="username">Baxtiyor Eshametov</span>
+                            <span class="username">{{auth()->user()->name}}</span>
                             <b class="caret"></b>
                         </a>
             <ul class="dropdown-menu extended logout">
               <div class="log-arrow-up"></div>
               <li class="eborder-top">
-                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                <a href="{{route('admin.profile.index')}}"><i class="icon_profile"></i>Hisobot sozlamalari</a>
               </li>
               <li>
-                <a href="logout.php"><i class="icon_key_alt"></i>Chiqish</a>
-
+                <form method="POST" action="{{ route('logout')}}">
+                  @csrf
+                  <button type="submit" class="btn btn-primary " style="width:100%">Chiqish</button>
+                </form>
               </li>
             </ul>
           </li>
@@ -181,42 +143,32 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="">
-                          <i class="icon_house_alt"></i>
-                          <span>Dashboard</span>
-                      </a>
+          <li class="{{request()->is('admin/posts') ? 'active' : ''}}">
+            <a class="" href="{{route('admin.posts.index')}}">
+              <i class="icon_house_alt"></i>
+              <span>{{ env('APP_NAME', 'Sayt') }}</span>
+            </a>
           </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>Forms</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href="core/insert.php">Malumot qo'shish</a></li>
-              <li><a class="" href="core/delet.php">Malumotni o'chirish</a></li>
-              <li><a class="" href="core/update.php">Malumotni o'zgartirish</a></li>
-            </ul>
+          <li class="{{request()->is('admin/cooks') ? 'active' : ''}}">
+            <a class="" href="{{route('admin.cooks.index')}}">
+              <i class="fa fa-cutlery"></i>
+              <span>Yaratish</span>
+            </a>
           </li> 
 
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_table"></i>
-                          <span>Tables</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href="basic_table.php">Basic Table</a></li>
-            </ul>
+          <li class="{{request()->is('admin/feedback*') ? 'active' : ''}}">
+            <a href="{{route('admin.feedback.index')}}" class="">
+              <i class="fa fa-envelope-o"></i>
+              <span>Xabarlar</span>
+            </a>
           </li>
-
+          
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_documents_alt"></i>
-                          <span>Pages</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
+                <i class="icon_documents_alt"></i>
+                <span>Pages</span>
+                <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
             <ul class="sub">
               <li><a class="" href="profile.html">Profile</a></li>
               <li><a class="" href="login.html"><span>Login Page</span></a></li>
@@ -238,7 +190,7 @@
             <div class="col-lg-12">
               <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
               <ol class="breadcrumb">
-                <li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
+                <li><i class="fa fa-home"></i><a href="{{route('admin.posts.index')}}">Home</a></li>
                 <li><i class="fa fa-laptop"></i>Dashboard</li>
               </ol>
             </div>

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use App\Blogs;
-use Illuminate\Routing\Route;
-
+use Image;
 class PostsController extends Controller
 {
     /**
@@ -16,7 +16,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $blogs = Blogs::all();
+        $page = env('PAGINATE_SIZE', 15);
+        $blogs = Blogs::latest()->paginate($page);
+        
         return view('admin.posts.index', compact('blogs'));
     }
 
@@ -38,14 +40,34 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
 
-            'title' => 'required',
-            'short' => 'required',
+            'title'   => 'required',
+            'short'   => 'required',
             'content' => 'required',
-        ]);
+            'img'     => 'required|mimes:jpeg,bmp,jpg,png',
 
-        Blogs::create($request->all());
+        ]);
+        
+        $img_name = $request->file('img')->store('pic', ['disk' => 'public']);
+        $full_path = storage_path('app/public/'.$img_name);
+        $full_thumb_path = storage_path('app/public/thumbs/'.$img_name);
+        $thumb = Image::make($full_path);
+        
+        $thumb->resize(350, 350, function($constraint){
+            $constraint->aspectRatio();
+        })->save($full_thumb_path);
+        // dd($thumb);
+        $data = [
+            'title' => $request->title,
+            'short' =>$request->short,
+            'content' => $request->content,
+            'img'  => $img_name,
+            'thumb' => 'thumbs/'.$img_name
+            
+        ];
+        Blogs::create($data);
         return redirect()->route('admin.posts.index')
                          ->with('success','Product created successfully.');
        
@@ -71,7 +93,7 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    { 
         $blog = Blogs::findOrFail($id);
         return view('admin.posts.edit', compact('blog')); 
     }
@@ -90,15 +112,38 @@ class PostsController extends Controller
          $request->validate([
             'title' => 'required',
             'short' => 'required',
-            'content' => 'required|min:100',
+            'content' => 'required|min:100'
          ]);
+         if($request->file('img'))
+         {
+            //Delet old file
+            Storage::disk('public')->delete([
+                $blog->img,
+                $blog->thumb
+                ]);
+            $img_name = $request->file('img')->store('pic', ['disk' => 'public']);
+            $thumb_name = 'thumbs/'.$img_name;
+            $full_path = storage_path('app/public/'.$img_name);
+            $full_thumb_path = storage_path('app/public/'.$thumb_name);
+            $thumb = Image::make($full_path);
+            
+            $thumb->resize(350, 350, function($constraint){
+                $constraint->aspectRatio();
+            })->save($full_thumb_path);  
 
-         $blog->update([
-            'title' => $request->post('title'),
-            'short' => $request->post('short'),
-            'content' => $request->post('content'),
-         ]);
-            return redirect()->route('admin.posts.index')->with('danger', 'Malumotlar qoshildi');
+        }
+        else{
+            $img_name = $blog->img;
+            $thumb_name = $blog->thumb;
+        }
+            $blog->update([
+                'title' => $request->post('title'),
+                'short' => $request->post('short'),
+                'content' => $request->post('content'),
+                'img' => $img_name,
+                'thumb' => $thumb_name 
+            ]);
+       return redirect()->route('admin.posts.index')->with('success', 'Malumotlar qoshildi');
 
     }
 
@@ -111,8 +156,12 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $model = Blogs::findOrFail($id);
-
+        Storage::disk('public')->delete([
+            $model->img,
+            $model->thumb
+            ]);
         $model->delete();
+
         return redirect()->route('admin.posts.index')->with('delete', 'Item deleted!');
     }
 }
