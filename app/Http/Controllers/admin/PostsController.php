@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Blogs;
-use Image;
+use App\Serveces\ImageResize;
 class PostsController extends Controller
 {
     /**
@@ -51,13 +51,8 @@ class PostsController extends Controller
         ]);
         
         $img_name = $request->file('img')->store('pic', ['disk' => 'public']);
-        $full_path = storage_path('app/public/'.$img_name);
-        $full_thumb_path = storage_path('app/public/thumbs/'.$img_name);
-        $thumb = Image::make($full_path);
+        ImageResize::crop($img_name, 350, 350, 'resize');
         
-        $thumb->resize(350, 350, function($constraint){
-            $constraint->aspectRatio();
-        })->save($full_thumb_path);
         // dd($thumb);
         $data = [
             'title' => $request->title,
@@ -123,13 +118,7 @@ class PostsController extends Controller
                 ]);
             $img_name = $request->file('img')->store('pic', ['disk' => 'public']);
             $thumb_name = 'thumbs/'.$img_name;
-            $full_path = storage_path('app/public/'.$img_name);
-            $full_thumb_path = storage_path('app/public/'.$thumb_name);
-            $thumb = Image::make($full_path);
-            
-            $thumb->resize(350, 350, function($constraint){
-                $constraint->aspectRatio();
-            })->save($full_thumb_path);  
+            ImageResize::crop($img_name, 350, 350);
 
         }
         else{

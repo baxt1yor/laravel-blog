@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Post;
+use App\Cooks;
 use App\Blogs;
 use App\Feedback;
 
@@ -44,9 +44,9 @@ class SiteController extends Controller
     public function about()
     {  
         $pagi_size = 4;
-        $posts = Post::latest()->paginate($pagi_size);
-        $links = $posts->links();
-        return view('about', compact('posts', 'links'));
+        $cooks = Cooks::latest()->paginate($pagi_size);
+        $links = $cooks->links();
+        return view('about', compact('cooks', 'links'));
     }
 
     public function blog()

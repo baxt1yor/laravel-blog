@@ -10,22 +10,23 @@
       <table class="table table-bordered">
        @include('admin.alerts.main')
         <thead>
-            <tr>
-                <th><i class="icon_profile"></i>To'liq ismi</th>
-                <th>Start-Date</th>
-                <th><i class="icon_cogs"></i>Sozlamalar</th>
-            </tr>
+          <tr>
+            <th><i class="icon_profile"></i> To`liq ismi</th>
+            <th><i class="icon_mail_alt"></i> Email</th>
+            <th><i class="icon_calendar"></i> Start Date</th>
+            <th><i class="icon_cogs"></i> Action</th>
+          </tr>
         </thead>
 
         <tbody>
             @foreach ($cooks as $cook)
           <tr>
-            <td style="width:400px;text-align:center;">{{$cook->full_name}}</td>
-            <td style="width:400px;text-align:center;">{{$cook->special}}</td>
-            
+            <td style="">{{$cook->full_name}}</td>
+            <td style="">{{$cook->start_date}}</td>
+            <td>{{$cook->google}}</td>
             <td>
               <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <a target="_blank" class="btn btn-primary" href="{{route('admin.cook.show')}}"><i class="fa fa-eye"></i>Ko'rish</a>
+                <a  class="btn btn-primary" href="{{route('admin.cooks.show', $cook->id)}}"><i class="fa fa-eye"></i>Ko'rish</a>
                 
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

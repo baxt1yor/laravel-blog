@@ -152,7 +152,7 @@
           <li class="{{request()->is('admin/cooks') ? 'active' : ''}}">
             <a class="" href="{{route('admin.cooks.index')}}">
               <i class="fa fa-cutlery"></i>
-              <span>Yaratish</span>
+              <span>Oshpazlar</span>
             </a>
           </li> 
 

@@ -28,7 +28,7 @@
             <input type="file" id="exampleInputFile" name="img">
             <p class="help-block">Rasm fayl tanlang (.png; .jpg; .jpeg)</p>
           </div>
-          <div class="form-grou">
+          <div class="form-group">
             <img src="/storage/{{$blog->thumb}}" class="img img-thumbnail" width="200px" alt="img">
           </div>
           <button type="submit" class="btn btn-primary">Saqlash</button>

@@ -111,24 +111,22 @@
         <div class="container">
           <h3 class="oh"><span class="d-inline-block wow slideInUp" data-wow-delay="0s">our team</span></h3>
           <div class="row row-lg row-40 justify-content-center">
-            @foreach($posts as $post)
+            @foreach($cooks as $cook)
             <div class="col-sm-6 col-lg-3 wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">
               <!-- Team Modern-->
               <article class="team-modern">
                 <a class="team-modern-figure blog_item_date" href="#">
-                  <h3>{{$post->created_at->format('d')}}</h3>
-                  <img src="/storage/{{$post->img}}" alt="" width="270" height="270">
-                      <p>{{$post->created_at->format('M')}}</p>
-                </a>
+                  <h3>{{$cook->created_at->format('d')}}</h3>
+                  <img src="{{asset('/storage/'.$cook->picture)}}" alt="" width="270" height="270">
+                      <p>{{ date('d/m/Y', strtotime($cook->start_date)) }}</p>
                 <div class="team-modern-caption">
-                  <h6 class="team-modern-name"><a href="#">{{$post->title}}</a></h6>
-                  <div class="team-modern-status">{{$post->short}}</div>
+                  <h6 class="team-modern-name"><a href="#">{{$cook->full_name}}</a></h6>
+                  <div class="team-modern-status">{{$cook->special}}</div>
                   <ul class="list-inline team-modern-social-list">
-                    <li><a class="icon mdi mdi-facebook" href="#"></a></li>
-                    <li><a class="icon mdi mdi-twitter" href="#"></a></li>
-                    <li><a class="icon mdi mdi-instagram" href="#"></a></li>
-                    <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
-                    <li><span class="icon mdi fas fa-eye">{{$post->view}}</span></li>
+                    <li><a class="icon mdi mdi-facebook" href="{{$cook->facebook}}"></a></li>
+                    <li><a class="icon mdi mdi-twitter" href="{$cook->twitter}}"></a></li>
+                    <li><a class="icon mdi mdi-instagram" href="{{$cook->instagram}}"></a></li>
+                    <li><a class="icon mdi mdi-google-plus" href="{{$cook->google}}"></a></li>
                   </ul>
                 </div>
               </article>

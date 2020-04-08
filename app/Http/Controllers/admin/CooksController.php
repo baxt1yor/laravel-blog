@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Cokes;
+use Illuminate\Support\Facades\Storage;
+use App\Serveces\ImageResize;
+use App\Cooks;
 class CooksController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class CooksController extends Controller
      */
     public function index()
     {
-        $cooks = Cokes::latest()->paginate(env('PAGINATE_SIZE', 15));
+        $cooks = Cooks::latest()->paginate(env('PAGINATE_SIZE', 15));
         
         return view('admin.cooks.index', compact('cooks'));
     }
@@ -26,15 +28,7 @@ class CooksController extends Controller
      */
     public function create(Request $request)
     {
-        $data = $request->validate([
-            'full_name' => 'required|min:3|max:100',
-            'special' => 'required|min:5|max:100',
-            'start_date' => 'requred|date',
-            'picture' => 'required|file|mimes:jpg,jpeg,png'
-        ]);
-
-        
-        return view('admin.cooks.create');
+       return view('admin.cooks.create');
     }
 
     /**
@@ -45,7 +39,36 @@ class CooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'full_name' => 'required|min:3|max:100',
+            'special' => 'required|min:5|max:100',
+            'start_date' => 'required|date',
+            'google' => 'required',
+            'facebook' => 'required',
+            'instagram' => 'required',
+            'twitter' => 'required',  
+            'picture' => 'required|file|mimes:jpg,jpeg,png'
+        ]);
+        
+        
+        $img_name = $request->file('picture')->store('cooks', ['disk' => 'public']);
+        ImageResize::crop($img_name, 350, 350);
+        $thumb = 'thumbs/'.$img_name;
+
+        Cooks::create([
+            'full_name' => $data['full_name'],
+            'special' => $data['special'],
+            'start_date' => $data['start_date'],
+            'google' => $data['google'],
+            'facebook' => $data['facebook'],
+            'instagram' => $data['instagram'],
+            'twitter' => $data['twitter'],     
+            'picture' => $thumb
+        ]);
+
+        //dd($data);
+        return redirect()->route('admin.cooks.index')->with('Success', 'Oshpaz yaratildi');
+    
     }
 
     /**
@@ -56,7 +79,9 @@ class CooksController extends Controller
      */
     public function show($id)
     {
-        //
+        $cook = Cooks::findOrFail($id);
+
+        return view('admin.cooks.show',compact('cook'));
     }
 
     /**
@@ -67,7 +92,8 @@ class CooksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cooks = Cooks::findOrFail($id);
+        return view('admin.cooks.edit', compact('cooks'));
     }
 
     /**
@@ -79,7 +105,45 @@ class CooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cook = Cooks::findOrFail($id);
+        $data = $request->validate([
+            'full_name' => 'required|min:3|max:100',
+            'special' => 'required|min:3',
+            'start_date' => 'required|date',
+            'google' => 'required',
+            'facebook' => 'required',
+            'instagram' => 'required',
+            'twitter' => 'required',
+        ]);
+        
+       if ($request->file('picture'))
+       {
+            Storage::disk('public')->delete([
+                $cook->picute
+            ]);
+
+            $img_name = $request->file('picture')->store('cooks', ['disk' => 'public']);
+            //$thumb_name = 'thumbs/'.$img_name;
+            ImageResize::crop($img_name, 350, 350);
+       }
+       else
+       {
+           $img_name = $cook->picture;
+       }
+
+       $cook->update([
+            'full_name' => $data['full_name'],
+            'special' => $data['special'],
+            'start_date' => $data['start_date'],
+            'google' => $data['google'],
+            'instagram' => $data['instagram'],
+            'facebook' => $data['facebook'],
+            'twitter' => $data['twitter'],
+            'picture' => $img_name,
+       ]);
+
+       return redirect()->route('admin.cooks.index')->with('Success', 'Malumotlar almashtirildi');
+
     }
 
     /**
@@ -90,6 +154,11 @@ class CooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cook = Cooks::findOrFail($id);
+        Storage::disk('public')->delete([
+            $cook->picture
+        ]);
+        $cook->delete();
+        return redirect()->route('admin.cooks.index')->with('delete', 'Malumot o`chirildi!');
     }
 }
