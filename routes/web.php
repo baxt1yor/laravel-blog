@@ -43,17 +43,19 @@ use Illuminate\Support\Facades\Route;
                 Route::get('feedback/{id}/show', 'FeddbacksController@show')->name('feedback.show');
 
                 Route::delete('feedback/{id}/delete', 'FeddbacksController@destroy')->name('feedback.delete');
+
                 //Profile
                 Route::get('/profile', 'ProfileController@index')->name('profile.index');
                 Route::put('/profile/update', 'ProfileController@update')->name('profile.update');
                 Route::put('/profile/password', 'ProfileController@password')->name('profile.password');
                 //cooks
                 Route::resource('cooks', 'CooksController');
-               
+                
                 //Posts
                 Route::resource('posts', 'PostsController');
             });
 
             Auth::routes();
+
 
             // Route::get('/home', 'HomeController@index')->name('home');

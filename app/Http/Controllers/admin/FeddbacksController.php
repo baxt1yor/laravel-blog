@@ -14,7 +14,6 @@ class FeddbacksController extends Controller
             $links = $items->links();
             return view('admin.feedback.index', compact('items', 'links'));
         } 
-
         
         public function show($id)
         {

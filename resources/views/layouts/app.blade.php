@@ -72,13 +72,15 @@
                       <li>
                         <div class="unit unit-spacing-xs">
                           <div class="unit-left"><span class="icon mdi mdi-phone"></span></div>
-                          <div class="unit-body"><a class="phone" href="tel:#">+998 97 525 88 97</a></div>
+
+                          <div class="unit-body"><a class="phone" href="tel:#">+998 99 969 08 98</a></div>
                         </div>
                       </li>
                       <li>
                         <div class="unit unit-spacing-xs">
                           <div class="unit-left"><span class="icon mdi mdi-map-marker"></span></div>
-                          <div class="unit-body"><a class="address" href="#">7 S. Gulzor St. Uzbekistan</a></div>
+
+                          <div class="unit-body"><a class="address" href="#">4 S. Yoshlar St. Uzbekistan</a></div>
                         </div>
                       </li>
                     </ul>
@@ -248,7 +250,11 @@
                   <div class="footer-modern-contacts wow slideInUp">
                     <div class="unit unit-spacing-sm align-items-center">
                       <div class="unit-left"><span class="icon icon-24 mdi mdi-phone"></span></div>
+<<<<<<< HEAD
                       <div class="unit-body"><a class="phone" href="tel:#">+998 97 525 88 97</a></div>
+=======
+                      <div class="unit-body"><a class="phone" href="tel:#">+998 99 969 08 98</a></div>
+>>>>>>> 4a6f01060ed78da36d7ab23f1179ba1e6416ab7d
                     </div>
                   </div>
                   <div class="footer-modern-contacts wow slideInDown">
@@ -273,7 +279,11 @@
         <div class="footer-modern-line-3">
           <div class="container">
             <div class="row row-10 justify-content-between">
+<<<<<<< HEAD
               <div class="col-md-6"><span>7 S. Gulzor St. Uzbekistan</span></div>
+=======
+              <div class="col-md-6"><span>4 S. Yoshlar St. Uzbekistan</span></div>
+>>>>>>> 4a6f01060ed78da36d7ab23f1179ba1e6416ab7d
               <div class="col-md-auto">
                 <!-- Rights-->
                 <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span></span><span>.&nbsp;</span><span>All Rights Reserved.</span><span> Design&nbsp;by&nbsp;<a href="https://www.templatemonster.com">TemplateMonster</a></span></p>

@@ -101,7 +101,7 @@
                 </a>
                 @endforeach
               </li>
-             
+              
               
               <li>
                 <a href="{{route('admin.feedback.index')}}">Barcha xabarlar</a>
@@ -216,7 +216,7 @@
           <script src="/dashboard/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
           <script src="/dashboard/js/owl.carousel.js"></script>
           <!-- jQuery full calendar -->
-           <script src="/dashboard/js/fullcalendar.min.js"></script>
+            <script src="/dashboard/js/fullcalendar.min.js"></script>
             <!-- Full Google Calendar - Calendar -->
             <script src="/dashboard/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
             <!--script for this page only-->
